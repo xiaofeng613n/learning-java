@@ -6,7 +6,12 @@
 
   <groupId>xiaofeng</groupId>
   <artifactId>learning-java</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>learning-jstorm</module>
+      <module>learning-log</module>
+  </modules>
 
   <name>learning-java</name>
   <!-- FIXME change it to the project's website -->
