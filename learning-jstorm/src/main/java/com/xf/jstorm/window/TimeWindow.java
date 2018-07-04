@@ -43,7 +43,7 @@ public class TimeWindow {
 	}
 
 	public void fireWaterMark(){
-		eventQueue.stream().filter( event -> event.getTs() > windowLength )
-		Event event = eventQueue.stream().min((Long t1, Long t2) -> t1 > t2 ? 1 : 0).get();
+		eventQueue.stream().filter( event -> event.getTs() > windowLength );
+//		Event event = eventQueue.stream().min((Long t1, Long t2) -> t1 > t2 ? 1 : 0).get();
 	}
 }

@@ -11,6 +11,7 @@
   <modules>
     <module>learning-jstorm</module>
       <module>learning-log</module>
+      <module>learning-netty</module>
   </modules>
 
   <name>learning-java</name>
