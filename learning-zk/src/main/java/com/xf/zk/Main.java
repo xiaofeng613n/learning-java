@@ -27,11 +27,11 @@ public class Main {
 				return null;
 			}
 		};
-		FollowerRunnable follower = new FollowerRunnable(5000, leaderCallback);
-		Thread thread = new Thread(follower);
-		thread.setDaemon(true);
-		thread.start();
-		System.out.println("Successfully init Follower thread");
+//		FollowerRunnable follower = new FollowerRunnable(5000, leaderCallback);
+//		Thread thread = new Thread(follower);
+//		thread.setDaemon(true);
+//		thread.start();
+//		System.out.println("Successfully init Follower thread");
 	}
 
 	private void init() {

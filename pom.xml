@@ -13,6 +13,7 @@
       <module>learning-log</module>
       <module>learning-netty</module>
       <module>learning-zk</module>
+      <module>learning-basic</module>
   </modules>
 
   <name>learning-java</name>
