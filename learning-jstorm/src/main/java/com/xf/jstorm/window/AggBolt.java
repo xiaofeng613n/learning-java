@@ -13,6 +13,9 @@ import java.util.Map;
  * Description:
  */
 public class AggBolt  implements IRichBolt {
+
+    private TimeWindow
+
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
 

@@ -13,17 +13,40 @@ public class LogTest {
 		MDC.put("trackId","xx");
 		Logger LOG = LoggerFactory.getLogger(LogTest.class);
 		LOG.info("log:{}",1);
-		MDC.remove("trackId");
+//		MDC.remove("trackId");
 		LOG.info("log:{}",2);
 
-		Thread thread = new Thread(new Runnable() {
+		Thread thread = new Thread(new MyRunnable("xx", new Runnable() {
 			@Override
 			public void run() {
-//				MDC.put("trackId","xx");
+				MDC.put("trackId","x1x");
 				Logger LOG = LoggerFactory.getLogger(LogTest.class);
 				LOG.info("log:{}",1);
 			}
-		});
+		}) );
+
 		thread.start();
+
+		LOG.info("log:{}",2);
+
+	}
+
+
+	public static class MyRunnable implements Runnable{
+
+		private String trackId;
+
+		private Runnable runnable;
+
+		public MyRunnable(String trackId,Runnable runnable){
+			this.trackId = trackId;
+			this.runnable = runnable;
+		}
+
+		@Override
+		public void run() {
+			MDC.put("trackId",trackId);
+			runnable.run();
+		}
 	}
 }

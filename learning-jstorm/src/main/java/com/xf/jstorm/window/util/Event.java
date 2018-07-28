@@ -5,5 +5,7 @@ package com.xf.jstorm.window.util;
  */
 public interface Event {
 
+	String getKey();
+
 	 long getTs();
 }
