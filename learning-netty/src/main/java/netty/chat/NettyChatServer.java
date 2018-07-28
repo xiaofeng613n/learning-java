@@ -5,6 +5,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.Future;
@@ -22,6 +24,12 @@ public class NettyChatServer implements Runnable{
 
     private static final Logger LOG = LoggerFactory.getLogger(NettyChatServer.class);
 
+    private Class serverSocketClazz;
+
+    public NettyChatServer(Class serverSocketClazz){
+        this.serverSocketClazz = serverSocketClazz;
+    }
+
     @Override
     public void run() {
         start();
@@ -37,13 +45,21 @@ public class NettyChatServer implements Runnable{
 
 
     public void start(){
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup(2);
+        EventLoopGroup bossGroup;
+        EventLoopGroup workerGroup;
+
+        if( serverSocketClazz == EpollServerSocketChannel.class){
+        	bossGroup = new EpollEventLoopGroup(1);
+			workerGroup = new EpollEventLoopGroup(2);
+		} else {
+			bossGroup = new NioEventLoopGroup(1);
+			workerGroup = new NioEventLoopGroup(2);
+		}
 
         try {
             ServerBootstrap server = new ServerBootstrap();
             server.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
+                    .channel(serverSocketClazz)
                     .childHandler(channelInitializer)
                     .childOption(ChannelOption.SO_BACKLOG.SO_KEEPALIVE, true);
 
@@ -69,7 +85,7 @@ public class NettyChatServer implements Runnable{
     }
 
     public static void main(String[] args) {
-        NettyChatServer server = new NettyChatServer();
+        NettyChatServer server = new NettyChatServer(NioServerSocketChannel.class);
         Thread thread = new Thread(server);
         thread.start();
         Scanner scanner = new Scanner(System.in);
