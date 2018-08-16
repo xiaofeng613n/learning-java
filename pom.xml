@@ -15,6 +15,7 @@
       <module>learning-zk</module>
       <module>learning-basic</module>
       <module>learning-redis</module>
+      <module>learning-jetty</module>
   </modules>
 
   <name>learning-java</name>
