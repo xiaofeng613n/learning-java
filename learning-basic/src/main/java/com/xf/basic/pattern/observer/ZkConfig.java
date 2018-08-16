@@ -27,7 +27,7 @@ public class ZkConfig extends Observable {
 	}
 
 	private String loadData(){
-
+		return "";
 	}
 
 	public void init(){
