@@ -9,14 +9,24 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>learning-jstorm</module>
-      <module>learning-log</module>
-      <module>learning-netty</module>
-      <module>learning-zk</module>
+       <!--<module>learning-jstorm</module>-->
+     <!-- <module>learning-log</module>-->
+     <!-- <module>learning-netty</module>-->
+     <!-- <module>learning-zk</module>-->
       <module>learning-basic</module>
       <module>learning-redis</module>
       <module>learning-jetty</module>
       <module>learning-queue</module>
+
+    <module>learning-api</module>
+    <module>learning-api-impl</module>
+      <module>learning-pb</module>
+      <module>learning-kafka</module>
+      <module>learning-mr</module>
+      <module>learning-antlr</module>
+      <!--  <module>learning-redis</module>-->
+     <!-- <module>learning-jetty</module>-->
+
   </modules>
 
   <name>learning-java</name>
@@ -25,8 +35,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>

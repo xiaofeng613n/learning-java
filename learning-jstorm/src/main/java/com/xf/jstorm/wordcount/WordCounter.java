@@ -34,6 +34,7 @@ public class WordCounter implements IRichBolt{
 
 	@Override
 	public void execute(Tuple input) {
+//		input.getStringByField("word")
 		String word = input.getString(0);
 		Integer counter = counters.get(word);
 		if (counter == null) {
@@ -49,7 +50,7 @@ public class WordCounter implements IRichBolt{
 	public void cleanup() {
 		LOG.info("ending word count:");
 		for (Map.Entry<String, Integer> entry : counters.entrySet()) {
-			LOG.info("{}:{}",entry.getKey(),entry.getValue());
+			LOG.error("{}:{}",entry.getKey(),entry.getValue());
 		}
 	}
 
