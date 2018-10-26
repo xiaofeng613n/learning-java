@@ -16,6 +16,7 @@
       <module>learning-basic</module>
       <module>learning-redis</module>
       <module>learning-jetty</module>
+      <module>learning-queue</module>
   </modules>
 
   <name>learning-java</name>
