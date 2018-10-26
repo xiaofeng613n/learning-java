@@ -9,10 +9,10 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-       <!--<module>learning-jstorm</module>-->
-     <!-- <module>learning-log</module>-->
-     <!-- <module>learning-netty</module>-->
-     <!-- <module>learning-zk</module>-->
+       <module>learning-jstorm</module>
+      <module>learning-log</module>
+      <module>learning-netty</module>
+      <module>learning-zk</module>
       <module>learning-basic</module>
       <module>learning-redis</module>
       <module>learning-jetty</module>

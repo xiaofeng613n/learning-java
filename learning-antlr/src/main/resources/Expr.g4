@@ -1,5 +1,5 @@
 grammar Expr;
-
+@header{package xiaofeng.expr;}
 prog : stat+;
 
 stat: expr NEWLINE          # printExpr

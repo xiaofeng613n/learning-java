@@ -5,6 +5,9 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import xiaofeng.expr.EvalVisitor;
+import xiaofeng.expr.ExprLexer;
+import xiaofeng.expr.ExprParser;
 
 import java.io.IOException;
 
@@ -16,29 +19,23 @@ public class App {
 
     public static void main(String [] args) throws IOException {
 
-        CharStream input = CharStreams.fromString("12*2+12\r\n");
-        MathLexer lexer=new MathLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MathParser parser = new MathParser(tokens);
-        ParseTree tree = parser.prog(); // parse
-        MathBaseVisitor vt=new MathBaseVisitor();
-        vt.visit(tree);
+        testExpr();
 
     }
 
-    public static void testAssign() throws IOException {
+    public static void testExpr() throws IOException {
 
-        ANTLRInputStream input = new ANTLRInputStream(System.in);
+        //ExprLexer 是词法分析器， ExprParser是语法分析器
 
-        AssignLexer lexer = new AssignLexer(input);
+        ANTLRInputStream inputStream = new ANTLRInputStream("1 + 2 + 3 * 4+ 6 / 2");
+        ExprLexer lexer = new ExprLexer(inputStream);
 
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-        AssignParser parser = new A(tokens);
-
-        ParseTree tree = parser.assign();
-
-        System.out.println(tree.toStringTree(parser));
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        ExprParser parser = new ExprParser(tokenStream);
+        ParseTree parseTree = parser.prog();
+        EvalVisitor visitor = new EvalVisitor();
+        Integer rtn = visitor.visit(parseTree);
+        System.out.println("#result#"+rtn.toString());
 
     }
 
