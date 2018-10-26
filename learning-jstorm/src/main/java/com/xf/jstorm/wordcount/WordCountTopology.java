@@ -22,8 +22,11 @@ public class WordCountTopology {
 
 		builder.setSpout(WORD_READER_SPOUT_ID, new WordReader());
 
-		builder.setBolt(WORD_NORMALIZER_BOLT_ID, new WordNormalizer(),1)
+		builder.setBolt(WORD_NORMALIZER_BOLT_ID, new WordNormalizer())
 				.shuffleGrouping(WORD_READER_SPOUT_ID);
+
+//		builder.setBolt("test", new PrintBolt(),1)
+//				.shuffleGrouping(WORD_READER_SPOUT_ID);
 
 		builder.setBolt(WORD_COUNTER_BOLT_ID, new WordCounter(),1)
 				.fieldsGrouping(WORD_NORMALIZER_BOLT_ID,new Fields("word"));

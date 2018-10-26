@@ -26,7 +26,7 @@ public class WordNormalizer implements IRichBolt{
 
 	@Override
 	public void execute(Tuple input) {
-
+//		input.getStringByField("line");
 		String sentence = input.getString(0);
 		String [] words = sentence.split(" ");
 		for (String word : words) {

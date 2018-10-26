@@ -18,6 +18,8 @@
     <module>learning-api-impl</module>
       <module>learning-pb</module>
       <module>learning-kafka</module>
+      <module>learning-mr</module>
+      <module>learning-antlr</module>
       <!--  <module>learning-redis</module>-->
      <!-- <module>learning-jetty</module>-->
   </modules>

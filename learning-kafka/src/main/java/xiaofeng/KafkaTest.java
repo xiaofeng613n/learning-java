@@ -42,20 +42,22 @@ public class KafkaTest
 		kafkaProducerProperties.put("buffer.memory", 33554432);
 		kafkaProducerProperties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		kafkaProducerProperties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		kafkaProducerProperties.put("bootstrap.servers", "10.40.6.151:9092,10.40.6.152:9092,10.40.6.153:9092");
+		kafkaProducerProperties.put("bootstrap.servers", "10.40.6.100:9092,10.40.6.151:9092,10.40.6.152:9092,10.40.6.153:9092");
 
 		Producer<String, String> producer = new KafkaProducer<>(kafkaProducerProperties);
 		for(int i = 0; i < Integer.MAX_VALUE; i++)
 		{
 //			String topic =  ( i % 2 ) == 0 ? "topic1" : "topic2";
-			String topic = "app2";
+			String topic = "app10";
 			Future<RecordMetadata> send = null;
 			try{
-				send = producer.send(new ProducerRecord<String, String>(topic, Integer.toString(i), Integer.toString(i)), new Callback() {
+				String k = Integer.toString(i);
+				send = producer.send(new ProducerRecord<String, String>(topic, k, Integer.toString(i)), new Callback() {
 					@Override
 					public void onCompletion(RecordMetadata metadata, Exception exception) {
 						if( exception != null ){
 							System.out.println(exception);
+							System.out.println(k);
 						}
 					}
 				});
@@ -65,7 +67,7 @@ public class KafkaTest
 //			System.out.println("offset:" +send.get().offset());
 //			System.out.println("partition:" + send.get().partition());
 //			producer.flush();
-//			Thread.sleep(1000);
+			Thread.sleep(1000);
 		}
 
 		producer.close();
