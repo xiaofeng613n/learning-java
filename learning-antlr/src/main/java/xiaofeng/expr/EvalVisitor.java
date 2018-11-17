@@ -15,6 +15,10 @@ public class EvalVisitor extends ExprBaseVisitor<Integer> {
 
 	}
 
+	@Override public Integer visitPrintExpr(ExprParser.PrintExprContext ctx) {
+		return visit(ctx.expr());
+	}
+
 	@Override
 	public Integer visitInt(ExprParser.IntContext ctx) {
 		return Integer.valueOf(ctx.INT().getText());

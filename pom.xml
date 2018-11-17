@@ -27,6 +27,9 @@
       <module>learning-metrics</module>
       <!--  <module>learning-redis</module>-->
      <!-- <module>learning-jetty</module>-->
+    <module>learning-springboot</module>
+      <module>learning-es</module>
+      <module>learning-lucene</module>
 
   </modules>
 
