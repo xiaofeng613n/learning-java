@@ -24,6 +24,7 @@
       <module>learning-kafka</module>
       <module>learning-mr</module>
       <module>learning-antlr</module>
+      <module>learning-metrics</module>
       <!--  <module>learning-redis</module>-->
      <!-- <module>learning-jetty</module>-->
 
