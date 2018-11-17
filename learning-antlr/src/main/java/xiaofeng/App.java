@@ -1,8 +1,6 @@
 package xiaofeng;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import xiaofeng.expr.EvalVisitor;
@@ -27,7 +25,7 @@ public class App {
 
         //ExprLexer 是词法分析器， ExprParser是语法分析器
 
-        ANTLRInputStream inputStream = new ANTLRInputStream("1 + 2 + 3 * 4+ 6 / 2");
+        ANTLRInputStream inputStream = new ANTLRInputStream("1 + 2 + 3 * 4+ 6 / 2 \n ");
         ExprLexer lexer = new ExprLexer(inputStream);
 
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
