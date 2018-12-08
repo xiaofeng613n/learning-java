@@ -30,6 +30,7 @@
     <module>learning-springboot</module>
       <module>learning-es</module>
       <module>learning-lucene</module>
+      <module>learning-thrift</module>
 
   </modules>
 
