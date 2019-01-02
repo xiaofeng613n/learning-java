@@ -10,7 +10,7 @@ import org.slf4j.MDC;
 public class LogTest {
 
 	public static void main(String[] args) {
-		MDC.put("trackId","xx");
+//		MDC.put("trackId","xx");
 		Logger LOG = LoggerFactory.getLogger(LogTest.class);
 		LOG.info("log:{}",1);
 //		MDC.remove("trackId");

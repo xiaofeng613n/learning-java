@@ -32,6 +32,7 @@
       <module>learning-lucene</module>
       <module>learning-spring</module>
       <module>learning-springMVC</module>
+      <module>learning-thrift</module>
 
   </modules>
 
