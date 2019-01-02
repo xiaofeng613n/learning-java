@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="Human" class="spring.aop.proxy.Human"></bean>
+
+    <bean id="SleepHelper" class="spring.aop.proxy.SleepHelper"></bean>
+    <!--//定义切点的常用的两种方式：1)使用正则表达式 2)使用AspectJ表达式，
+    //这里用正则表达式-->
+    <bean id="BeforAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="SleepHelper"></property>
+        <property name="pattern" value=".*sleep"></property>
+    </bean>
+    <!-- 代理对象 -->
+    <bean id="humanProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="Human"></property>
+        <property name="interceptorNames" value="BeforAdvisor"></property>
+    </bean>
+
+
+    <!-- 目标对象 -->
+    <bean id="Service" class="spring.aop.aopconfig.Service"></bean>
+
+    <!-- 切面： -->
+    <bean id="myAspect" class="spring.aop.aopconfig.MyAspect"></bean>
+    <!-- 配置切面 -->
+    <aop:config>
+        <!-- 配置切入点 -->
+        <aop:pointcut id="pointcut" expression="execution(public * *..Service.service(..))"/>
+        <!-- 将类方法定义为最终增强并引用pointcut切入点-->
+        <aop:aspect ref="myAspect">
+            <aop:before method="mybefore" pointcut-ref="pointcut"/>
+            <aop:after-returning method="myafterReturning" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
