@@ -33,6 +33,7 @@
       <module>learning-spring</module>
       <module>learning-springMVC</module>
       <module>learning-thrift</module>
+      <module>learning-hdfs</module>
 
   </modules>
 
