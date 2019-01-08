@@ -2,7 +2,9 @@ package com.xf.basic;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -17,8 +19,22 @@ public class CompletableFutureTest {
 	}
 	public static void main(String[] args) throws Exception {
 //		test1();
-		test2();
+//		test2();
+		test3();
 	}
+
+	public static void test3(){
+		String original = "Message";
+		StringBuilder result = new StringBuilder();
+		CompletableFuture.completedFuture(original).thenApply(String::toUpperCase)
+				.thenAcceptBoth(
+				CompletableFuture.completedFuture(original).thenApply(String::toLowerCase),
+				(s1, s2) -> result.append(s1 + s2));
+
+		System.out.println(result.toString());
+
+	}
+
 
 	public static void test2(){
 		final CompletableFuture<AtomicInteger> f = new CompletableFuture<>();
@@ -26,13 +42,21 @@ public class CompletableFutureTest {
 //			integer = integer + 2;
 			integer.addAndGet(1);
 			System.out.println(Thread.currentThread().getName() + ":" +integer);
+			String s = null;
+			s.contains("a");
 			return integer;
 		}).thenApplyAsync( integer -> {
 //			integer = integer + 1;
-			integer.addAndGet(1);
+			integer.addAndGet(2);
 			System.out.println(Thread.currentThread().getName() + ":" +integer);
-			return integer;
-		}).thenAcceptAsync(integer -> System.out.println(Thread.currentThread().getName() + ":" +integer));
+			return  integer;
+		}).thenAcceptAsync(integer -> System.out.println(Thread.currentThread().getName() + ":" +integer)).exceptionally(new Function<Throwable, Void>() {
+			@Override
+			public Void apply(Throwable throwable) {
+				System.out.println(throwable);
+				return null;
+			}
+		});
 
 		f.complete(new AtomicInteger(10));
 
@@ -77,4 +101,6 @@ public class CompletableFutureTest {
 			e.printStackTrace();
 		}
 	}
+
+
 }
