@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:app="http://www.xiaofeng.com/schema/app"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+
+       http://www.xiaofeng.com/schema/app
+       http://www.xiaofeng.com/schema/app/app.xsd">
+
+   <!-- <context:component-scan base-package="spring.*"/>
+    <task:annotation-driven executor="exceptionHandlingTaskExecutor" scheduler="defaultTaskScheduler" />
+    <bean id="exceptionHandlingTaskExecutor" class="spring.ExceptionHandlingAsyncTaskExecutor">
+        <constructor-arg ref="defaultTaskExecutor" />
+    </bean>
+    <task:executor id="defaultTaskExecutor" pool-size="5" />
+    <task:scheduler id="defaultTaskScheduler" pool-size="1" />-->
+
+    <!-- TKmybatis自动扫描注册Mybatis mapper -->
+    <!--<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="mybatis.mapping"/>-->
+    <!--</bean>-->
+    <!--
+    mvn mybatis-generator:generate
+    配置文件generatorConfig.xml详解：http://blog.csdn.net/isea533/article/details/42102297
+    -->
+   <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>-->
+
+    <!-- 配置Spring的事务管理器 -->
+   <!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>-->
+
+    <!-- 定义事务管理器（声明式的事务） -->
+   <!-- <bean id="transactionBase"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+          lazy-init="true" abstract="true">
+        &lt;!&ndash; 配置事务管理器 &ndash;&gt;
+        <property name="transactionManager" ref="transactionManager" />
+        &lt;!&ndash; 配置事务属性 &ndash;&gt;
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>-->
+
+    <!-- 配置DAO -->
+    <!--<bean id="userDaoTarget" class="com.bluesky.spring.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="userDao" parent="transactionBase" >
+        <property name="target" ref="userDaoTarget" />
+    </bean>-->
+
+
+    <bean id="xiao" class="xiaofeng.Student">
+        <property name="id" value="120"/>
+        <property name="name" value="xiaofeng"/>
+    </bean>
+
+
+
+    <!--AOP ProxyFactoryBean-->
+    <bean id="logBeforeAdvice" class="xiaofeng.aop.LogBeforeAdvice"></bean>
+    <bean id="logAfterReturningAdvice" class="xiaofeng.aop.LogAfterReturningAdvice"></bean>
+
+    <bean id = "bussinessService" class="xiaofeng.aop.BussinessServiceImp"></bean>
+
+    <bean id="methodProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!---->
+        <property name="proxyInterfaces">
+            <value>xiaofeng.aop.IBussinessService</value>
+    </property>
+        <!--目标对象-->
+        <property name="target">
+            <ref bean="bussinessService"></ref>
+        </property>
+        <!---->
+        <property name="interceptorNames">
+            <list>
+                <value>logBeforeAdvice</value>
+                <value>logAfterReturningAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--AOP ProxyFactory-->
+    <bean class="org.springframework.aop.framework.ProxyFactory">
+        <property name="target">
+            <ref bean="bussinessService"></ref>
+        </property>
+        <property name="interfaces">
+            <value>xiaofeng.aop.IBussinessService</value>
+        </property>
+    </bean>
+
+    <!-- tag -->
+    <app:service id="testServer"  serverName="HelloWorldService"></app:service>
+
+</beans>

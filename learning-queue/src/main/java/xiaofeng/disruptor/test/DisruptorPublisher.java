@@ -3,7 +3,7 @@ package xiaofeng.disruptor.test;
 import com.lmax.disruptor.*;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
-import com.xiaofeng.disruptor.LongEvent;
+//import com.xiaofeng.disruptor.LongEvent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -68,7 +68,7 @@ public class DisruptorPublisher implements EventPublisher {
 		long seq = ringbuffer.next();
 		try {
 			TestEvent evt = ringbuffer.get(seq);
-			evt.setValue(data);
+//			evt.setValue(data);
 		} finally {
 			ringbuffer.publish(seq);
 		}
