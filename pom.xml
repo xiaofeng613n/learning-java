@@ -34,6 +34,7 @@
       <module>learning-springMVC</module>
       <module>learning-thrift</module>
       <module>learning-hdfs</module>
+    <module>learngin-Guice</module>
 
   </modules>
 
