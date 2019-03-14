@@ -7,12 +7,15 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.IntField;
+//import org.apache.lucene.document.IntField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.BytesRef;
+import org.apache.lucene.util.IntsRef;
+import org.apache.lucene.util.fst.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +24,7 @@ public class LuceneIndexer {
 
     private volatile static LuceneIndexer instance;
 
-    private final static String INDEX_DIR = "D:\\lucene";
+    private final static String INDEX_DIR = "/Users/xiaofeng/workspace/learning-java/learning-lucene/indexpath";
 
     private static class SingletonHolder{
         private final static LuceneIndexer instance=new LuceneIndexer();
@@ -52,7 +55,8 @@ public class LuceneIndexer {
         for(int i = 0; i < ids.length;i++){
             Document doc = new Document();
             //添加字段
-            doc.add(new IntField("id", ids[i],Field.Store.YES)); //添加内容
+
+//            doc.add(new IntField("id", ids[i],Field.Store.YES)); //添加内容
             doc.add(new TextField("title", titles[i], Field.Store.YES)); //添加文件名，并把这个字段存到索引文件里
             doc.add(new TextField("tcontent", tcontents[i], Field.Store.YES)); //添加文件路径
             indexWriter.addDocument(doc);
@@ -80,4 +84,16 @@ public class LuceneIndexer {
 
     }
 
+//    public static void main(String[] args) {
+//        String inputValues[] = {"abd","abe", "acf"};
+//        byte[] outputValues[] = {{1,2}, {3,4}, {5,}};
+//        Outputs<BytesRef> outputs = ByteSequenceOutputs.getSingleton();
+//        Builder<BytesRef> builder = new Builder<BytesRef>(FST.INPUT_TYPE.BYTE1, outputs);
+//        BytesRef scratchBytes = new BytesRef();
+//        IntsRef scratchInts = new IntsRef();
+//        for (int i = 0; i < inputValues.length; i++) {
+//            scratchBytes;
+//            builder.add(Util.toIntsRef(scratchBytes, scratchInts ),new BytesRef(outputValues[i]));
+//        }
+//    }
 }
