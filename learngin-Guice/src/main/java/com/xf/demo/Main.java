@@ -9,6 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		CustomModuleBuilder moduleBuilder = new CustomModuleBuilder();
+		//moduleBuilder.iterator().hasNext();
 		moduleBuilder.add(new ToolModule());
 		moduleBuilder.add(new HumanModule());
 		Injector injector = moduleBuilder.createInjector();
