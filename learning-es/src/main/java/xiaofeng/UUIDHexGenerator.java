@@ -17,8 +17,7 @@ import java.util.Map;
  * Mapping parameters supported: separator.
  *
  */
-public class UUIDHexGenerator
-{
+public class UUIDHexGenerator {
 
     private static String sep = "";
 

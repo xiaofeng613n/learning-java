@@ -17,7 +17,7 @@ import org.apache.lucene.store.FSDirectory;
 
 public class QueryDemo {
 
-    private static String indexPath = "/Users/xiaofeng/workspace/learning-java/learning-lucene/indexpath";
+    private static String indexPath = "D:\\IdeaSpace\\learning-java\\learning-lucene\\indexPath";
     //QueryDemo.class.getClassLoader().getResource("index").getPath();
 
     public static void main(String[] args) throws Exception {
