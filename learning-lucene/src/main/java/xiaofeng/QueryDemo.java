@@ -99,6 +99,7 @@ public class QueryDemo {
     public static void excQuery(Query query) {
 
         try (IndexReader reader = getIndexReader()) {
+
             //获取查询数据
             IndexSearcher searcher = new IndexSearcher(reader);
             //检索数据
