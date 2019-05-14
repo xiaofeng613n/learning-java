@@ -60,7 +60,7 @@ public class JettyTest {
 
         // 设置内嵌的jetty支持session，默认情况下不支持session
         SessionManager sm = new HashSessionManager();
-        hand.setSessionHandler(new SessionHandler(sm));
+        //hand.setSessionHandler(new SessionHandler(sm));
         server.setHandler(hand);
         server.start();
         server.join();
