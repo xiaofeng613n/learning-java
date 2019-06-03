@@ -1,8 +1,0 @@
-spring:
-  mvc:
-    view:
-      prefix: /
-      suffix: .html
-  profiles:
-     active: pro
-
