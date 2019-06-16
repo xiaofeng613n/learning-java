@@ -35,6 +35,7 @@
       <module>learning-thrift</module>
       <module>learning-hdfs</module>
     <module>learngin-Guice</module>
+      <module>learning-springboot</module>
 
   </modules>
 

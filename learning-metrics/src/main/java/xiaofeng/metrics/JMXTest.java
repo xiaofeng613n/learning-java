@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class JMXTest {
     public static void main(String[] args) {
-        MyMBean myXMBean = new My();
+        final MyMBean myXMBean = new My();
         MBeanServer server = ManagementFactory.getPlatformMBeanServer();
         try {
             server.registerMBean(myXMBean, new ObjectName("myapp:type=webserver,name=Port 8080"));

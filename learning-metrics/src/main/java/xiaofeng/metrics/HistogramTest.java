@@ -27,3 +27,5 @@ public class HistogramTest {
         }
     }
 }
+
+// http://hao.jobbole.com/metrics/
