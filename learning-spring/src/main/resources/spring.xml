@@ -10,9 +10,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="Human" class="spring.aop.proxy.Human"></bean>
+    <bean id="Human" class="xiaofeng.aop.proxy.Human"></bean>
 
-    <bean id="SleepHelper" class="spring.aop.proxy.SleepHelper"></bean>
+    <bean id="SleepHelper" class="xiaofeng.aop.proxy.SleepHelper"></bean>
     <!--//定义切点的常用的两种方式：1)使用正则表达式 2)使用AspectJ表达式，
     //这里用正则表达式-->
     <bean id="BeforAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
@@ -27,10 +27,10 @@
 
 
     <!-- 目标对象 -->
-    <bean id="Service" class="spring.aop.aopconfig.Service"></bean>
+    <bean id="Service" class="xiaofeng.aop.aopconfig.Service"></bean>
 
     <!-- 切面： -->
-    <bean id="myAspect" class="spring.aop.aopconfig.MyAspect"></bean>
+    <bean id="myAspect" class="xiaofeng.aop.aopconfig.MyAspect"></bean>
     <!-- 配置切面 -->
     <aop:config>
         <!-- 配置切入点 -->
