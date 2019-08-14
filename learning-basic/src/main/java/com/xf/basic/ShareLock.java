@@ -26,21 +26,25 @@ public class ShareLock implements Lock {
 
 		@Override
 		protected boolean tryAcquire(int arg) {
-			int c = getState();
-			if( c < shareNum && compareAndSetState( c, c + 1) ) {
-				return true;
+			for (;;) {
+				int c = getState();
+				if( c < shareNum && compareAndSetState( c, c + 1) ) {
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 
 		@Override
 		protected boolean tryRelease(int arg) {
-			int c = getState();
+			for (;;) {
+				int c = getState();
 
-			if ( c > 0 && compareAndSetState( c, c - 1)) {
-				return true;
+				if ( c > 0 && compareAndSetState( c, c - 1)) {
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 	}
 
