@@ -57,8 +57,9 @@ public class LockSupportTest {
         // 中断线程
         t.interrupt();
 
-
         System.out.println("main over");
+
+        System.out.println(t.isInterrupted());
     }
 
 

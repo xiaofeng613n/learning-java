@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Date: 2019/7/31 15:42
  * @Description:
  */
-public class PrintThreadTest {
+public  class PrintThreadTest {
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -39,7 +39,7 @@ public class PrintThreadTest {
 	}
 
 
-	static class PrintThread extends Thread{
+	 static class PrintThread extends Thread{
 
 		private String string;
 

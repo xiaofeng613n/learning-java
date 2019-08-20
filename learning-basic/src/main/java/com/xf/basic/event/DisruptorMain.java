@@ -9,10 +9,9 @@ import com.lmax.disruptor.dsl.ProducerType;
 
 import java.util.concurrent.ThreadFactory;
 
-public class DisruptorMain
-{
-    public static void main(String[] args) throws Exception
-    {
+public class DisruptorMain {
+
+    public static void main(String[] args) throws Exception {
         /*1.定义事件*/
         // 队列中的元素
         class Element {
@@ -36,6 +35,7 @@ public class DisruptorMain
                 return new Thread(r, "simpleThread");
             }
         };
+
          /*2.定义事件工厂*/
         // RingBuffer生产工厂,初始化RingBuffer的时候使用
         EventFactory<Element> factory = new EventFactory<Element>() {
@@ -75,20 +75,18 @@ public class DisruptorMain
 
         RingBuffer<Element> ringBuffer = disruptor.getRingBuffer();
 
-        for (int l = 0; true; l++)
-        {
+        for (int l = 0; true; l++) {
+
             /*7.发布事件*/
             // 获取下一个可用位置的下标
             long sequence = ringBuffer.next();
-            try
-            {
+            try {
                 // 返回可用位置的元素
                 Element event = ringBuffer.get(sequence);
                 // 设置该位置元素的值
                 event.set(l);
             }
-            finally
-            {
+            finally {
                 ringBuffer.publish(sequence);
             }
             Thread.sleep(10);
