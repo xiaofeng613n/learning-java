@@ -23,6 +23,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<String> {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         LOG.info("channelActive");
         super.channelActive(ctx);
+        ctx.pipeline().write()
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<String> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println("recieve a message:" + msg);
-//        ctx.writeAndFlush()
+       ctx.writeAndFlush()
 
     }
 
